@@ -11,17 +11,19 @@ namespace Escritura_Archivos
     {
         static void Main(string[] args)
         {
-            StreamWriter sw = new StreamWriter("ejemplo.txt");
+            StreamWriter sw = new StreamWriter("ejemplo 2.txt", true);
             // Si el archivo no existe, lo creará
             // y  si ya es un archivo existente, escribira en el 
+            Console.Write("Indica cuantas personas quieres agregar:");
+            int cantidad = int.Parse(Console.ReadLine());
 
-            string[] lines =
-                {
-            "Un saludo pa la raza que se metio a leer mi programa",
-            "Aqui aprendiendo POO",
-            "Hey hey, pero si caben o no>"
-            };
-        
+            string[] lines = new string[cantidad];
+            for (int i = 0; i < lines.Length; i++)
+            {
+                Console.Write("Indique el nombre de la persona que desea escribir: ");
+                lines[i] = Console.ReadLine();
+            }
+
             foreach (string line in lines)
             {
                 sw.WriteLine(line);
