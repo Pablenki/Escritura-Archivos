@@ -8,34 +8,18 @@ using System.IO;
 namespace Escritura_Archivos
 {
     class program
-    { 
-    public class SeriesYPeliculas
-    {
-            string seriesypeliculas;
-            float calificacion;
-
-        public SeriesYPeliculas(string seriesypeliculas, float calificacion)
-        {
-            this.seriesypeliculas = seriesypeliculas;
-            this.calificacion = calificacion;
-        }
-
-        public void DesplegarDatos()
-        {                                             
-        Console.WriteLine("La pelicula o serie que vi es: " + seriesypeliculas + " y le doy una calificacion de: " + calificacion);                      
-        }
-    }
-
+    {       
         static void Main(string[] args)
         {
-            StreamWriter sw = new StreamWriter("Series&Peliculas.txt", true);
-
             string seriesypeliculas;
-            float calificacion;
+            float calificacion = 0;
+
+            StreamWriter sw = new StreamWriter("Series&Peliculas.txt", true);
             char inciso;
-         
+
             do
             {
+
                 Console.WriteLine("Si deseas seguir escribiendo ingresa la *S* por lo contrario, ingresa *N*");
                 Console.Write("¿Deseas seguir escribiendo?: ");
                 inciso = char.Parse(Console.ReadLine());
@@ -47,20 +31,21 @@ namespace Escritura_Archivos
                 {
                     case 'S':
                         {
+
                             // Captura de variables auxiliares
                             Console.Write("Nombre de la serie o de la pelicula: ");
                             seriesypeliculas = Console.ReadLine();
                             Console.Write("Calificacion de la serie o de la pelicula: ");
                             calificacion = float.Parse(Console.ReadLine());
-
-                            //comienza a escribir la serie o pelicula
-                            sw.WriteLine(seriesypeliculas + "\t\t" + calificacion);                            
                             SeriesYPeliculas Nombres = new SeriesYPeliculas(seriesypeliculas, calificacion);
+                            //comienza a escribir la serie o pelicula
+                            sw.WriteLine(Nombres.seriesypeliculas + "\t\t" + Nombres.Calificacion);
                             Nombres.DesplegarDatos();
 
-                            Console.WriteLine("Escribiendo archivo...");                          
-                            Console.ReadKey(); 
+                            Console.WriteLine("Escribiendo archivo...");
+                            Console.ReadKey();
                             Console.Clear();
+
                         }
                         break;
 
@@ -76,7 +61,6 @@ namespace Escritura_Archivos
                         break;
                 }
             } while (inciso != 'N');
-          
         }
-     }
+    }
 }
