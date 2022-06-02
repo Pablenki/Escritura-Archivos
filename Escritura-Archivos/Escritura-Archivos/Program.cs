@@ -7,31 +7,76 @@ using System.IO;
 
 namespace Escritura_Archivos
 {
-   internal class Program
+    class program
+    { 
+    public class SeriesYPeliculas
     {
-        static void Main(string[] args)
+            string seriesypeliculas;
+            float calificacion;
+
+        public SeriesYPeliculas(string seriesypeliculas, float calificacion)
         {
-            StreamWriter sw = new StreamWriter("ejemplo 2.txt", true);
-            // Si el archivo no existe, lo creará
-            // y  si ya es un archivo existente, escribira en el 
-            Console.Write("Indica cuantas personas quieres agregar:");
-            int cantidad = int.Parse(Console.ReadLine());
+            this.seriesypeliculas = seriesypeliculas;
+            this.calificacion = calificacion;
+        }
 
-            string[] lines = new string[cantidad];
-            for (int i = 0; i < lines.Length; i++)
-            {
-                Console.Write("Indique el nombre de la persona que desea escribir: ");
-                lines[i] = Console.ReadLine();
-            }
-
-            foreach (string line in lines)
-            {
-                sw.WriteLine(line);
-            }
-            sw.Close();
-
-            Console.WriteLine("Escribiendo en el archivo...");
-            Console.ReadLine();
+        public void DesplegarDatos()
+        {                                             
+        Console.WriteLine("La pelicula o serie que vi es: " + seriesypeliculas + " y le doy una calificacion de: " + calificacion);                      
         }
     }
+
+        static void Main(string[] args)
+        {
+            StreamWriter sw = new StreamWriter("Series&Peliculas.txt", true);
+
+            string seriesypeliculas;
+            float calificacion;
+            char inciso;
+         
+            do
+            {
+                Console.WriteLine("Si deseas seguir escribiendo ingresa la *S* por lo contrario, ingresa *N*");
+                Console.Write("¿Deseas seguir escribiendo?: ");
+                inciso = char.Parse(Console.ReadLine());
+
+                Console.Clear();
+
+                // Switch para elegir entre un menu de opciones
+                switch (inciso)
+                {
+                    case 'S':
+                        {
+                            // Captura de variables auxiliares
+                            Console.Write("Nombre de la serie o de la pelicula: ");
+                            seriesypeliculas = Console.ReadLine();
+                            Console.Write("Calificacion de la serie o de la pelicula: ");
+                            calificacion = float.Parse(Console.ReadLine());
+
+                            //comienza a escribir la serie 
+                            sw.WriteLine(seriesypeliculas + "\t\t" + calificacion);                            
+                            SeriesYPeliculas Nombres = new SeriesYPeliculas(seriesypeliculas, calificacion);
+                            Nombres.DesplegarDatos();
+
+                            Console.WriteLine("Escribiendo archivo...");                          
+                            Console.ReadKey(); 
+                            Console.Clear();
+                        }
+                        break;
+
+                    case 'N':
+                        {
+                            Console.WriteLine("Has decidido dejar de escribir");
+                            sw.Close();//El archivo siempre se cierra
+                        }
+                        break;
+
+                    default:
+                        Console.WriteLine("Opcion incorrecta, elige una de las opciones que se muestran al inicio");
+                        break;
+                }
+            } while (inciso != 'N');
+          
+        }
+     }
 }
