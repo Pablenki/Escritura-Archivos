@@ -53,7 +53,7 @@ namespace Escritura_Archivos
                             Console.Write("Calificacion de la serie o de la pelicula: ");
                             calificacion = float.Parse(Console.ReadLine());
 
-                            //comienza a escribir la serie 
+                            //comienza a escribir la serie o pelicula
                             sw.WriteLine(seriesypeliculas + "\t\t" + calificacion);                            
                             SeriesYPeliculas Nombres = new SeriesYPeliculas(seriesypeliculas, calificacion);
                             Nombres.DesplegarDatos();
